@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TripLogEntry",
+  "type": "object",
+  "properties": {
+    "date": { "type": "string", "format": "date" },
+    "trip_type": { "type": "string", "enum": ["דיג אורחים", "דיג שותפים", "תחזוקה", "הפלגת כיף"] },
+    "skipper": { "type": "string", "enum": ["דותן", "רפי", "אחר"] },
+    "engine_hours": { "type": "number" },
+
+    "guests": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "amount_paid": { "type": "number" },
+          "payment_method": { "type": "string", "enum": ["מזומן", "ביט", "אחר"] }
+        },
+        "required": ["name", "amount_paid", "payment_method"]
+      }
+    },
+
+    "fish": {
+      "type": "array",
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "properties": {
+          "species": { "type": "string" },
+          "weight_kg": { "type": "number" },
+          "sold": { "type": "boolean" },
+          "sell_price": { "type": "number" }
+        },
+        "required": ["species", "weight_kg"]
+      }
+    },
+
+    "fuel_cost": { "type": "number" },
+    "other_costs": { "type": "number" },
+    "notes": { "type": "string" }
+  },
+  "required": ["date", "trip_type", "skipper"]
+}
